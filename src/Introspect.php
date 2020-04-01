@@ -57,11 +57,6 @@ class Introspect
     {
         $result = $this->getIntrospectionResult();
         $givenScopes = explode(' ', $result['scope']);
-
-        if (in_array('*', $givenScopes)) {
-            return;
-        }
-
         $missingScopes = array_diff($requiredScopes, $givenScopes);
 
         if (count($missingScopes) > 0) {
