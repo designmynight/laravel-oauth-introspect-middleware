@@ -16,5 +16,7 @@ return [
 
     'scope' => env('AUTHORIZATION_SERVER_SCOPE'),
 
-    'model' => \Illuminate\Foundation\Auth\User::class
+    'model' => \Illuminate\Foundation\Auth\User::class,
+
+    'verify_ssl' => true,
 ];
