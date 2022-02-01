@@ -30,7 +30,11 @@ class IntrospectClient
     protected function getClient(): Client
     {
         if ($this->client === null) {
-            $this->setClient(new Client());
+            $config = [
+                'verify' => (bool) $this->config['verify_ssl'],
+            ];
+
+            $this->setClient(new Client($config));
         }
 
         return $this->client;
