@@ -36,6 +36,11 @@ class IntrospectGuard implements Guard
         return $this->check() ? $this->user()->getKey() : null;
     }
 
+    public function hasUser()
+    {
+        return !empty($this->user);
+    }
+
     public function user()
     {
         if ($this->user === false) {
