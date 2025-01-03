@@ -11,22 +11,24 @@ class IntrospectGuard implements Guard
 {
     protected $user = false;
 
+    private Introspect $introspect;
+
     public function __construct(Introspect $introspect)
     {
         $this->introspect = $introspect;
     }
 
-    public function authenticate()
+    public function authenticate(): bool
     {
         return $this->check();
     }
 
-    public function check()
+    public function check(): bool
     {
         return !is_null($this->user());
     }
 
-    public function guest()
+    public function guest(): bool
     {
         return !$this->check();
     }
@@ -36,7 +38,7 @@ class IntrospectGuard implements Guard
         return $this->check() ? $this->user()->getKey() : null;
     }
 
-    public function user()
+    public function user(): ?Authenticatable
     {
         if ($this->user === false) {
             try {
@@ -59,5 +61,10 @@ class IntrospectGuard implements Guard
     public function validate(array $credentials = []): bool
     {
         return true;
+    }
+
+    public function hasUser(): bool
+    {
+        return $this->user !== false;
     }
 }
