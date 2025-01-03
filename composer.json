@@ -11,8 +11,8 @@
     ],
     "require": {
 		"php": "^8.3",
-     	"guzzlehttp/guzzle": ">=1.16.0",
-        "laravel/framework": ">=1.15.5",
+     	"guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": ">10.0",
         "laravel/passport": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0"
     },
     "autoload": {
@@ -24,7 +24,7 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0"
+        "orchestra/testbench": "^8.0"
     },
     "extra": {
         "laravel": {
