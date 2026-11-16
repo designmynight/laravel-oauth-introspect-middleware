@@ -2,6 +2,7 @@
 
 namespace DesignMyNight\Laravel\OAuth2;
 
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\AuthenticationException;
@@ -38,15 +39,15 @@ class Introspect
 
         try {
             $this->result = $this->client->introspect($token);
-        } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                $result = json_decode((string) $e->getResponse()->getBody(), true);
+        } catch (BadResponseException $e) {
+            $result = json_decode((string) $e->getResponse()->getBody(), true);
 
-                if (isset($result['error'])) {
-                    throw new AuthenticationException($result['error']['title'] ?? '');
-                }
+            if (isset($result['error'])) {
+                throw new AuthenticationException($result['error']['title'] ?? '');
             }
 
+            throw new AuthenticationException($e->getMessage());
+        } catch (RequestException $e) {
             throw new AuthenticationException($e->getMessage());
         }
 
